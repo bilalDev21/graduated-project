@@ -1,0 +1,46 @@
+<div class="container mt-5">
+    <!-- Page Header -->
+    <div class="text-center mb-4">
+      <h1 class="page-title display-4">Event Management System</h1>
+      <p class="lead text-muted">Explore upcoming events or view them in the calendar.</p>
+  
+      <!-- Toggle Buttons to Switch Views -->
+      <div class="btn-group mb-3" role="group" aria-label="View toggle">
+        <button class="btn btn-primary" id="listViewBtn" (click)="showListView()">List View</button>
+        <button class="btn btn-outline-primary" id="calendarViewBtn" (click)="showCalendarView()">Calendar View</button>
+      </div>
+    </div>
+  
+    <!-- Event List View -->
+    <div id="listView" class="row" *ngIf="viewMode === 'list'">
+      <div *ngFor="let event of events" class="col-md-4 mb-4">
+        <div class="card event-card shadow-sm h-100">
+          <div class="card-body">
+            <h5 class="card-title">{{ event.name }}</h5>
+            <p class="card-text text-muted">{{ event.description }}</p>
+            <span class="badge bg-primary">{{ event.type }}</span>
+            <p class="card-date mt-2 text-secondary">
+              <i class="fas fa-calendar-alt"></i> {{ event.date | date: 'longDate' }}
+            </p>
+          </div>
+          <div class="card-footer text-center">
+            <button class="btn btn-outline-primary btn-sm" (click)="Book(event.id)">Book now</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Event Calendar View -->
+    <div id="calendarView" *ngIf="viewMode === 'calendar'">
+      <full-calendar [options]="calendarOptions"></full-calendar>
+    </div>
+  </div>
+  
+  <!-- Footer Section -->
+  <footer class="footer mt-5 py-3 bg-dark text-white text-center">
+    <div class="container">
+      <p class="mb-0">&copy; 2024 Event Management | All rights reserved.</p>
+      <p class="mb-0">Follow us on <a href="#" class="text-white">Twitter</a> and <a href="#" class="text-white">Facebook</a></p>
+    </div>
+  </footer>
+  
